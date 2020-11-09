@@ -56,7 +56,7 @@ class EncryptYourFiles:
 
                 print(decrypted.decode())
 
-PATH = "C:\\Users\\luchc\\Python Projects\\Cryptography\\Encrypted Files"
+PATH = "your_path_to_file_or_files"
 
 encryptor = EncryptYourFiles(PATH)
 
