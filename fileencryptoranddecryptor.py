@@ -18,7 +18,7 @@ class EncryptYourFiles:
 
         os.chdir(PATH)
 
-        print(os.listdir())
+        # print(os.listdir())
 
     def encrypt(self):
 
@@ -36,7 +36,7 @@ class EncryptYourFiles:
 
                 same_file.write(encrypted)
 
-                print(encrypted.decode())
+                # print(encrypted.decode())
 
     def decrypt(self):
 
@@ -54,7 +54,7 @@ class EncryptYourFiles:
 
                 f.write(decrypted)
 
-                print(decrypted.decode())
+                # print(decrypted.decode())
 
 PATH = "your_path_to_file_or_files"
 
