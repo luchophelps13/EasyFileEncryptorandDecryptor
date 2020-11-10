@@ -1,5 +1,8 @@
 from cryptography.fernet import Fernet
 import os 
+from datetime import datetime
+
+date = datetime.now().date()
 
 class EncryptYourFiles:
 
@@ -13,6 +16,12 @@ class EncryptYourFiles:
 
         global key
         key = Fernet(k)
+        
+    def save_key(self):
+
+        key_file = open(f"key{date}.key", "wb")
+        key_file.write(key)
+        key_file.close()
 
     def go_to_directory(self):
 
