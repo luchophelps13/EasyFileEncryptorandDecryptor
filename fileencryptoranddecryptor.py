@@ -91,7 +91,7 @@ class EncryptYourFiles:
 
                 print(decrypted.decode())
 
-# Change this to path of individual file or dire
+# Change this to path of individual file or directory
 PATH = "your_path_to_files_or_files"
 
 encryptor = EncryptYourFiles(PATH)
