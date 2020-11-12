@@ -1,8 +1,11 @@
 from cryptography.fernet import Fernet
-import os 
+import os
 from datetime import datetime
 
 date = datetime.now().date()
+k = Fernet.generate_key()
+
+key = Fernet(k)
 
 class EncryptYourFiles:
 
@@ -10,26 +13,49 @@ class EncryptYourFiles:
 
         self.PATH = PATH
 
-    def make_key(self):
-
-        k = Fernet.generate_key()
-
-        global key
-        key = Fernet(k)
-        
     def save_key(self):
 
         key_file = open(f"key{date}.key", "wb")
-        key_file.write(key)
+        key_file.write(k)
         key_file.close()
 
     def go_to_directory(self):
 
         os.chdir(PATH)
 
-        # print(os.listdir())
+        print(os.listdir())
 
-    def encrypt(self):
+    def encrypt_file(self):
+
+        with open(PATH, "r") as f:
+
+            data = f.read().encode()
+
+        with open(PATH, "wb") as same_file:
+
+            encrypted = key.encrypt(data)
+
+            same_file.truncate(0)
+
+            same_file.write(encrypted)
+
+    def decrypt_file(self):
+
+        with open(PATH, 'rb') as f: 
+
+            data = f.read()
+    
+        with open(PATH, 'wb') as f: 
+            
+            decrypted = key.decrypt(data)
+
+            decrypted.decode()
+
+            f.write(decrypted)
+
+            #print(decrypted.decode())
+
+    def encrypt_directory(self):
 
         for filename in os.listdir(os.getcwd()):
             
@@ -45,9 +71,9 @@ class EncryptYourFiles:
 
                 same_file.write(encrypted)
 
-                # print(encrypted.decode())
+                print(encrypted.decode())
 
-    def decrypt(self):
+    def decrypt_directory(self):
 
         for filename in os.listdir(os.getcwd()):
 
@@ -63,13 +89,26 @@ class EncryptYourFiles:
 
                 f.write(decrypted)
 
-                # print(decrypted.decode())
+                print(decrypted.decode())
 
-PATH = "your_path_to_file_or_files"
+# Change this to path of individual file or dire
+PATH = "C:\\Users\\luchc\\Python Projects\\Cryptography\\Encrypted Files"
 
 encryptor = EncryptYourFiles(PATH)
 
-encryptor.make_key()
-encryptor.go_to_directory()
-encryptor.encrypt()
-encryptor.decrypt()
+choice = input("Would you like to encrypt a file or a directory (that includes sub-directories)")
+
+if choice == "file":
+
+    encryptor.save_key()
+    encryptor.encrypt_file()
+    # encryptor.decrypt_file()
+
+elif choice == "directory":
+
+    encryptor.save_key()
+    encryptor.encrypt_directory()
+    encryptor.decrypt_directory()
+
+else:
+    print("Invalid Input.")
