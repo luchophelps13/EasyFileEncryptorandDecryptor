@@ -57,13 +57,13 @@ class EncryptYourFiles:
         os.chdir(PATH)
         print(os.listdir())
 
-        for filename in os.listdir(os.getcwd()):
+        for filename in os.listdir(PATH):
             
-            with open(os.path.join(os.getcwd(), filename), 'r') as f: 
+            with open(os.path.join(PATH, filename), 'r') as f: 
 
                 data = f.read().encode()
 
-            with open(os.path.join(os.getcwd(), filename), 'wb') as same_file: 
+            with open(os.path.join(PATH, filename), 'wb') as same_file: 
 
                 encrypted = key.encrypt(data)
 
@@ -75,13 +75,13 @@ class EncryptYourFiles:
 
     def decrypt_directory(self):
 
-        for filename in os.listdir(os.getcwd()):
+        for filename in os.listdir(PATH):
 
-            with open(os.path.join(os.getcwd(), filename), 'rb') as f: 
+            with open(os.path.join(PATH, filename), 'rb') as f: 
 
                 contents = f.read()
     
-            with open(os.path.join(os.getcwd(), filename), 'wb') as f: 
+            with open(os.path.join(PATH, filename), 'wb') as f: 
                 
                 decrypted = key.decrypt(contents)
 
@@ -101,7 +101,7 @@ choice = input("Would you like to encrypt a file or a directory (that can includ
 if choice.lower() == "file":
 
     encryptor.save_key()
-    encryptor.go_to_directory(
+    encryptor.go_to_directory()
     encryptor.encrypt_file()
     # encryptor.decrypt_file()
 
