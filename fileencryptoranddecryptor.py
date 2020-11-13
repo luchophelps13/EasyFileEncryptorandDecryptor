@@ -19,14 +19,11 @@ class EncryptYourFiles:
         key_file.write(k)
         key_file.close()
 
-    def go_to_directory(self):
-
-        os.chdir(PATH)
-
-        print(os.listdir())
-
     def encrypt_file(self):
 
+        os.chdir(PATH)
+        print(os.listdir())
+        
         with open(PATH, "r") as f:
 
             data = f.read().encode()
@@ -56,6 +53,9 @@ class EncryptYourFiles:
             #print(decrypted.decode())
 
     def encrypt_directory(self):
+        
+        os.chdir(PATH)
+        print(os.listdir())
 
         for filename in os.listdir(os.getcwd()):
             
@@ -96,11 +96,12 @@ PATH = "your_path_to_files_or_files"
 
 encryptor = EncryptYourFiles(PATH)
 
-choice = input("Would you like to encrypt a file or a directory (that includes sub-directories)")
+choice = input("Would you like to encrypt a file or a directory (that can include sub-directories)")
 
 if choice == "file":
 
     encryptor.save_key()
+    encryptor.go_to_directory(
     encryptor.encrypt_file()
     # encryptor.decrypt_file()
 
