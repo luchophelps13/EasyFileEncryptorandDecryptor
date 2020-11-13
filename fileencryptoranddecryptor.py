@@ -91,21 +91,21 @@ class EncryptYourFiles:
 
                 print(decrypted.decode())
 
-# Change this to path of individual file or directory
+# Change this to the path of the individual file or directory
 PATH = "your_path_to_files_or_files"
 
 encryptor = EncryptYourFiles(PATH)
 
 choice = input("Would you like to encrypt a file or a directory (that can include sub-directories)")
 
-if choice == "file":
+if choice.lower() == "file":
 
     encryptor.save_key()
     encryptor.go_to_directory(
     encryptor.encrypt_file()
     # encryptor.decrypt_file()
 
-elif choice == "directory":
+elif choice.lower() == "directory":
 
     encryptor.save_key()
     encryptor.encrypt_directory()
