@@ -109,7 +109,7 @@ elif choice.lower() == "directory":
 
     encryptor.save_key()
     encryptor.encrypt_directory()
-    encryptor.decrypt_directory()
+    # encryptor.decrypt_directory()
 
 else:
     print("Invalid Input.")
